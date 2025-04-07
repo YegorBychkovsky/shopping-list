@@ -1,6 +1,6 @@
 import { Container, CssBaseline, ThemeProvider, createTheme } from '@mui/material';
 import { usePersistence } from './hooks/usePersistence';
-import {AddItemForm} from './components/AddItemForm';
+import { AddItemForm } from './components/AddItemForm/index';
 import { ShoppingList } from './components/ShoppingList';
 
 const theme = createTheme({

@@ -18,7 +18,7 @@ export const useShoppingStore = create<ShoppingListState & {
   setSearchTerm: (term: string) => void;
   setCategory: (category: Category | 'All') => void;
   toggleShowPurchased: () => void;
-}>((set, get) => ({
+}>((set) => ({
   ...initialState,
   addItem: (item) => {
     const newItem = { ...item, id: crypto.randomUUID() };
@@ -64,15 +64,20 @@ export const useShoppingStore = create<ShoppingListState & {
   undo: () => {
     set((state) => {
       if (state.history.length === 0) return state;
-      const previousState = state.history[state.history.length - 1];
+      const previousItems = state.history[state.history.length - 1];
       return {
-        items: previousState,
+        items: previousItems,
         history: state.history.slice(0, -1),
       };
     });
   },
-  setSearchTerm: (term) => set({ searchTerm: term }),
-  setCategory: (category) => set({ selectedCategory: category }),
-  toggleShowPurchased: () =>
-    set((state) => ({ showPurchased: !state.showPurchased })),
+  setSearchTerm: (term) => {
+    set({ searchTerm: term });
+  },
+  setCategory: (category) => {
+    set({ selectedCategory: category });
+  },
+  toggleShowPurchased: () => {
+    set((state) => ({ showPurchased: !state.showPurchased }));
+  },
 })); 
